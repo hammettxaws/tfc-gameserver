@@ -3,6 +3,8 @@ import { Construct } from 'constructs';
 import { CodePipeline, CodePipelineSource, ShellStep } from 'aws-cdk-lib/pipelines';
 import { StringParameter } from 'aws-cdk-lib/aws-ssm';
 
+import { GameServerStage } from './game-server';
+
 export class Pipeline extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
@@ -43,5 +45,9 @@ export class Pipeline extends cdk.Stack {
         primaryOutputDirectory: 'infra/cdk.out',
       })
     });
+
+    pipeline.addStage(new GameServerStage(this, "gameserver", {
+      // env: { account: "111111111111", region: "eu-west-1" }
+    }));
   }
 }

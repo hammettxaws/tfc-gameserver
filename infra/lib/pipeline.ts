@@ -7,7 +7,7 @@ export class Pipeline extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    const isLocal = this.node.tryGetContext('is_local') || false
+    const isLocal = this.node.tryGetContext('is_local') == 'true'
     const envName = this.node.tryGetContext('env_name')
 
     if (!envName) {
@@ -20,13 +20,14 @@ export class Pipeline extends cdk.Stack {
     let gh_branch = 'main';
 
     if (isLocal) {
+      console.log('... running locally')
       gh_owner = this.node.tryGetContext('gh_owner');
       gh_repo = this.node.tryGetContext('gh_repo');
       gh_branch = this.node.tryGetContext('gh_branch')
-    }
 
-    if (!gh_owner && !gh_repo && !gh_branch) {
-      throw new Error("Couldn't add the Policy!");
+      if (!gh_owner && !gh_repo && !gh_branch) {
+        throw new Error("Couldn't add the Policy!");
+      }
     } else {
       gh_owner = StringParameter.valueForStringParameter(this, `/gs/${envName}/gh_owner`)
       gh_repo = StringParameter.valueForStringParameter(this, `/gs/${envName}gh_repo`)

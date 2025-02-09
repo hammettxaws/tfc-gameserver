@@ -28,9 +28,9 @@ export class Pipeline extends cdk.Stack {
     if (!gh_owner && !gh_repo && !gh_branch) {
       throw new Error("Couldn't add the Policy!");
     } else {
-      gh_owner = StringParameter.valueForStringParameter(this, `gs/${envName}/gh_owner`)
-      gh_repo = StringParameter.valueForStringParameter(this, `gs/${envName}gh_repo`)
-      gh_branch = StringParameter.valueForStringParameter(this, `gs/${envName}gh_branch`)
+      gh_owner = StringParameter.valueForStringParameter(this, `/gs/${envName}/gh_owner`)
+      gh_repo = StringParameter.valueForStringParameter(this, `/gs/${envName}gh_repo`)
+      gh_branch = StringParameter.valueForStringParameter(this, `/gs/${envName}gh_branch`)
     }
 
     const pipeline = new CodePipeline(this, 'Pipeline', {

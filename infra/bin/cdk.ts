@@ -13,5 +13,6 @@ if (envName && envName != 'unknown') {
     }
   });
 } else {
-  console.log(`error: environment not found ${envName}`)
+  console.log('add enviornment using "--context envName=foo"')
+  throw new Error(`error: environment not found`);
 }

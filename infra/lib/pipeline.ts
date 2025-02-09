@@ -15,8 +15,8 @@ export class Pipeline extends cdk.Stack {
       synth: new ShellStep('Synth', {
         // requires web hook permissions
         input: CodePipelineSource.gitHub(`${gh_owner}/${gh_repo}`, gh_branch),
-        commands: ['cd cdk', 'npm ci', 'npm run build', 'npx cdk synth'],
-        primaryOutputDirectory: 'cdk/cdk.out',
+        commands: ['cd infra', 'npm ci', 'npm run build', 'npx cdk synth'],
+        primaryOutputDirectory: 'infra/cdk.out',
       })
     });
   }

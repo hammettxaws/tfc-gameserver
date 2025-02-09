@@ -40,7 +40,7 @@ export class Pipeline extends cdk.Stack {
         // requires web hook permissions
         input: CodePipelineSource.gitHub(`${gh_owner}/${gh_repo}`, gh_branch),
         commands: ['cd infra', 'npm ci', 'npm run build', 'npx cdk synth', 'pwd'],
-        // primaryOutputDirectory: 'cdk.out',
+        primaryOutputDirectory: 'infra/cdk.out',
       })
     });
   }

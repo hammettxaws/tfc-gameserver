@@ -23,6 +23,7 @@ export class Pipeline extends cdk.Stack {
       gh_owner = this.node.tryGetContext('gh_owner');
       gh_repo = this.node.tryGetContext('gh_repo');
       gh_branch = this.node.tryGetContext('gh_branch')
+    }
 
     if (!gh_owner && !gh_repo && !gh_branch) {
       throw new Error("Couldn't add the Policy!");
